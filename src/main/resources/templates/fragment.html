@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<!-- Fixed navbar -->
+<nav th:fragment="header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Linh navigation</span>
+                <p style="width: 30px ; height: 30px; display: flex; align-items: center; justify-content: center" class="icon-bar">-</p>
+            </button>
+            <a class="navbar-brand" href="#">Spring Chat App</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
+                <li class="active"><a th:href="@{/chat}" >Chat Rooms</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language</a>
+                    <ul class="dropdown-menu">
+                        <li><a id="english" href="?lang=en">English</a></li>
+                        <li><a id="portuguese" href="?lang=pt">Portuguese</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" sec:authorize="isAuthenticated()">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span sec:authentication="name"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a id="newChatRoom" href="#" data-toggle="modal" data-target="#newChatRoomModal" sec:authorize="hasRole('ROLE_ADMIN')">New Chat Room</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+</body>
+</html>

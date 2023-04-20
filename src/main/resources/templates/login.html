@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div th:replace="fragment::header"></div>
+
+<div class="container">
+    <h3>Login</h3>
+    <hr />
+    <div id="errorMessage" th:if="${param.error}">
+        <h4 class="alert alert-danger">Error authentication</h4>
+    </div>
+    <form class="form-horizontal" method="post" th:action="@{/login}">
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label"> Username</label>
+            <div class="col-sm-5">
+                <input type="text" id="username" name="username" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-5">
+                <input type="password" class="form-control" id="password" name="password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-default">Sign In</button>
+                <a href="/new-account">Or create an account</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+</body>
+</html>
